@@ -340,6 +340,7 @@ public class VideoModule extends CameraModule
         mActivity.setPreviewStatusListener(mUI);
 
         SettingsManager settingsManager = mActivity.getSettingsManager();
+        settingsManager.set(mAppController.getModuleScope(), Keys.KEY_CAMERA_ID, 0);
         mCameraId = settingsManager.getInteger(mAppController.getModuleScope(),
                                                Keys.KEY_CAMERA_ID);
 
@@ -827,7 +828,7 @@ public class VideoModule extends CameraModule
         // Remove the preview sizes that are not preferred.
         while (it.hasNext()) {
             Size size = it.next();
-            if (size.width() * size.height() > product) {
+            if (product > 0 && size.width() * size.height() > product) {
                 it.remove();
             }
         }
@@ -1678,7 +1679,9 @@ public class VideoModule extends CameraModule
         if (mCameraCapabilities.supports(CameraCapabilities.Feature.ZOOM)) {
             mCameraSettings.setZoomRatio(mZoomValue);
         }
-        updateFocusParameters();
+        //add by fuqiang, remove focus, for fatal error,start
+        //updateFocusParameters();
+        //add by fuqiang, remove focus, for fatal error,end
 
         mCameraSettings.setRecordingHintEnabled(true);
 
