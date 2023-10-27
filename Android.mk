@@ -2,6 +2,8 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
+LOCAL_MANIFEST_FILE := app/AndroidManifest.xml
+
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
@@ -17,13 +19,13 @@ LOCAL_STATIC_JAVA_LIBRARIES += jsr305
 
 LOCAL_USES_LIBRARIES := org.apache.http.legacy
 
-LOCAL_SRC_FILES := $(call all-java-files-under, src)
-LOCAL_SRC_FILES += $(call all-java-files-under, src_pd)
-LOCAL_SRC_FILES += $(call all-java-files-under, src_pd_gcam)
+LOCAL_SRC_FILES := $(call all-java-files-under, app/src)
+LOCAL_SRC_FILES += $(call all-java-files-under, app/src_pd)
+LOCAL_SRC_FILES += $(call all-java-files-under, app/src_pd_gcam)
 
 LOCAL_RESOURCE_DIR += \
-	$(LOCAL_PATH)/res \
-	$(LOCAL_PATH)/res_p
+	$(LOCAL_PATH)/app/res \
+	$(LOCAL_PATH)/app/res_p
 
 include $(LOCAL_PATH)/version.mk
 
@@ -39,6 +41,7 @@ LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0
 LOCAL_LICENSE_CONDITIONS := notice
 
 LOCAL_SDK_VERSION := current
+LOCAL_CERTIFICATE := platform
 
 LOCAL_PRODUCT_MODULE := true
 
